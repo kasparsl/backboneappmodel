@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Backbone test APP</title>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+	
+	</head>
+	<body>
+		<div id="user_container"></div>
+			<script>
+				User = Backbone.Model.extend({
+						initialize:function(){
+								console.log('Backbone user model has been initialized');
+						},
+						defaults: {
+								username: "maryano",
+								email: "maryano34234@gmail.com"
+						},
+						getUserEmail: function(){
+							return this.get('email');
+							
+						}
+								
+				});
+				var user = new User();
+				console.log(user.get('username'));
+				//using accessor function
+				console.log(user.getUserEmail());
+				
+				//init user object with non-default values
+				brad = new User({username: "Kasparsg", email: "kasparsg@gmail.com"});
+				
+				console.log (brad.getUserEmail());
+				/*expected browser console output:
+				Backbone user model has been initialized (index):15
+				maryano (index):28
+				maryano34234@gmail.com (index):30
+				Backbone user model has been initialized (index):15
+				kasparsg@gmail.com 
+				*/
+				
+			</script>
+		
+		
+		Hi There, Again!
+		
+	</body>
+
+</html>
