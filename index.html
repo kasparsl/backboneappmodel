@@ -13,6 +13,16 @@
 				User = Backbone.Model.extend({
 						initialize:function(){
 								console.log('Backbone user model has been initialized');
+								//event handler  - handle all property changes
+								this.on('change', function(){
+										alert('user info has been updated!');
+								});
+									
+								//handle only email changes
+								this.on('change:email', function(){
+										alert('user email has been updated!');
+										
+								});
 						},
 						defaults: {
 								username: "maryano",
@@ -21,7 +31,21 @@
 						getUserEmail: function(){
 							return this.get('email');
 							
+						},
+						getUsername: function(){
+							return this.get('username');
+							
+						},
+
+						changeUserEmail: function(newEmail){
+								this.set({email: newEmail});
+						
+						},
+						changeUsername: function(newUsername){
+								this.set({username: newUsername});
+						
 						}
+						
 								
 				});
 				var user = new User();
@@ -30,15 +54,24 @@
 				console.log(user.getUserEmail());
 				
 				//init user object with non-default values
-				brad = new User({username: "Kasparsg", email: "kasparsg@gmail.com"});
+				kaspars = new User({username: "Kasparsg", email: "kasparsg@gmail.com"});
 				
-				console.log (brad.getUserEmail());
+				console.log (kaspars.getUserEmail());
+				
+				kaspars.changeUserEmail('kasparsgggg@yahoo.com');
+				console.log (kaspars.getUserEmail());
+				
+				kaspars.changeUsername('kaspars2gg');
+				
+				console.log("New username : " + kaspars.getUsername());
 				/*expected browser console output:
 				Backbone user model has been initialized (index):15
-				maryano (index):28
-				maryano34234@gmail.com (index):30
+				maryano (index):52
+				maryano34234@gmail.com (index):54
 				Backbone user model has been initialized (index):15
-				kasparsg@gmail.com 
+				kasparsg@gmail.com (index):59
+				kasparsgggg@yahoo.com (index):62
+				New username : kaspars2g 
 				*/
 				
 			</script>
